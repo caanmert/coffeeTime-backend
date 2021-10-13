@@ -37,7 +37,7 @@ const MachineSchema = new Schema({
     default: false,
   },
 
-})();
+});
 
 const Machine = mongoose.model('machines', MachineSchema);
 module.exports = Machine;

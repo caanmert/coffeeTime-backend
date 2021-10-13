@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
 
 require('dotenv').config();
 
@@ -36,8 +37,11 @@ connection.once('open', () => {
   console.log('Mongodb database connection established');
 });
 
+app.use(session({ secret: 'secret' }));
+
 app.use(passport.initialize());
 app.use(passport.session());
+app.use('/api', require('./routes/machine'));
 
 app.use('*', (req, res) => {
   res.status(404).json({ status: false, message: 'Address not found' });
