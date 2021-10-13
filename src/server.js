@@ -1,5 +1,5 @@
 require('dotenv').config();
-const express = require('express')
+const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const passport = require('passport');
@@ -22,30 +22,27 @@ app.use('*', (req, res, next) => {
   next();
 });
 
-app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({ extended: false }));
 
-  app.use(express.json());
+app.use(express.json());
 
-  const uri = process.env.DB_URL;
-  mongoose.connect(uri, {
-    useNewUrlParser: true, useUnifiedTopology: true,
-  });
+const uri = process.env.DB_URL;
+mongoose.connect(uri, {
+  useNewUrlParser: true, useUnifiedTopology: true,
+});
 
-
-  const { connection } = mongoose;
+const { connection } = mongoose;
 connection.once('open', () => {
   console.log('Mongodb database connection established');
 });
-
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('*', (req, res) => {
-    res.status(404).json({ status: false, message: 'Address not found' });
-  });
-  
-  app.listen(port, () => {
-    console.log(`Listening on port ${port}!`);
-  });
-  
+  res.status(404).json({ status: false, message: 'Address not found' });
+});
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}!`);
+});
