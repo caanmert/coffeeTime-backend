@@ -15,6 +15,11 @@ async function addMachine(req, res) {
     }
     const newMachine = {
       machine: req.body.machine,
+      location: {
+        longitude: req.body.longitude,
+        latitude: req.body.latitude,
+      },
+      ratings: { value: req.body.value },
       approved: false,
     };
     const machine = await MachineService.addMachine(newMachine);
