@@ -4,8 +4,9 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const helmet = require('helmet');
-const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+
+require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -19,6 +20,21 @@ app.use(helmet());
 app.use('*', (req, res, next) => {
   res.setHeader('Content-Type', 'application/json');
   next();
+});
+
+app.use(express.urlencoded({extended:false}))
+
+  app.use(express.json());
+
+  const uri = process.env.DB_URL;
+  mongoose.connect(uri, {
+    useNewUrlParser: true, useUnifiedTopology: true,
+  });
+
+
+  const { connection } = mongoose;
+connection.once('open', () => {
+  console.log('Mongodb database connection established');
 });
 
 
