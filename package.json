@@ -1,0 +1,36 @@
+{
+  "name": "coffeetime-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "setup": "npm install && npm update",
+    "start": "node src/server.js",
+    "server": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "mongoose": "^6.0.10",
+    "passport": "^0.5.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.25.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caanmert/coffeeTime-backend.git"
+  },
+  "author": "Can Mert",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/caanmert/coffeeTime-backend/issues"
+  },
+  "homepage": "https://github.com/caanmert/coffeeTime-backend#readme"
+}
