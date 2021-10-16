@@ -20,7 +20,6 @@ async function addMachine(req, res) {
         latitude: req.body.latitude,
       },
       ratings: { value: req.body.value },
-      approved: false,
     };
     const machine = await MachineService.addMachine(newMachine);
     return res.status(200).json({
@@ -51,12 +50,46 @@ async function getAllMachines(req, res) {
   }
 }
 
+async function getOneMachine(req, res) {
+  const { id } = req.params;
+  try {
+    const machine = await MachineService.getMachineById(id);
+    return res.status(200).json({
+      success: true,
+      machine,
+    });
+  } catch (err) {
+    return res.status(200).json({
+      success: false,
+      message: err.message,
+    });
+  }
+}
+
+async function deleteMachine(req, res) {
+  // const userId = req.user.id;
+  const { id } = req.params;
+
+  try {
+    await MachineService.deleteMachine(id);
+    return res.status(200).json({
+      success: true,
+      message: 'Machine is deleted',
+    });
+  } catch (err) {
+    return res.status(200).json({
+      succcess: false,
+      message: err.message,
+    });
+  }
+}
+
 const validate = (method) => {
   switch (method) {
     case 'add': {
       return [
         body('machine').exists().notEmpty().withMessage('Machine Field is empty'),
-        body('approved').exists().notEmpty().withMessage('Approved field is empty'),
+
       ];
     }
   }
@@ -64,6 +97,8 @@ const validate = (method) => {
 
 module.exports = {
   addMachine,
+  getOneMachine,
   getAllMachines,
+  deleteMachine,
   validate,
 };
