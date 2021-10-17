@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const LocationSchema = new Schema({
+
+  city: {
+    type: Schema.Types.String,
+  },
   longitude: {
     type: Schema.Types.String,
   },
