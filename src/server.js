@@ -42,6 +42,7 @@ app.use(session({ secret: 'secret' }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/api', require('./routes/machine'));
+app.use('/api', require('./routes/user'));
 
 app.use('*', (req, res) => {
   res.status(404).json({ status: false, message: 'Address not found' });

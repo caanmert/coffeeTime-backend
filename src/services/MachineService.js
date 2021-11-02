@@ -14,5 +14,6 @@ module.exports = {
   addMachine,
   getMachineById,
   getAllMachines,
+  getAllApprovedMachines,
   deleteMachine,
 };

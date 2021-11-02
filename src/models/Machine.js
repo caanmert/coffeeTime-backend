@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const LocationSchema = new Schema({
+/* const LocationSchema = new Schema({
 
   city: {
     type: Schema.Types.String,
@@ -13,9 +13,12 @@ const LocationSchema = new Schema({
   latitude: {
     type: Schema.Types.String,
   },
-});
+}); */
 
 const RatingSchema = new Schema({
+  comment: {
+    type: Schema.Types.String,
+  },
   value: {
     type: Schema.Types.Number,
     max: 10,
@@ -24,11 +27,21 @@ const RatingSchema = new Schema({
 });
 
 const MachineSchema = new Schema({
+
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'Users',
+    required: true,
+  },
+
   machine: {
     type: Schema.Types.String,
     required: true,
   },
-  location: LocationSchema,
+  city: {
+    type: Schema.Types.String,
+  },
+  coordinates: [],
   image: {
     type: [String],
   },

@@ -8,18 +8,15 @@ async function addMachine(req, res) {
 
   try {
     if (!errors.isEmpty()) {
-      res.status(200).json({
+      return res.status(200).json({
         success: false,
         errors,
       });
     }
     const newMachine = {
       machine: req.body.machine,
-      location: {
-        longitude: req.body.longitude,
-        latitude: req.body.latitude,
-      },
-      ratings: { value: req.body.value },
+      coordinates: [req.body.coordinates],
+
     };
     const machine = await MachineService.addMachine(newMachine);
     return res.status(200).json({
@@ -38,6 +35,21 @@ async function addMachine(req, res) {
 async function getAllMachines(req, res) {
   try {
     const machines = await MachineService.getAllMachines();
+    return res.status(200).json({
+      success: true,
+      machines,
+    });
+  } catch (err) {
+    return res.status(200).json({
+      success: false,
+      message: err.message,
+    });
+  }
+}
+
+async function getAllApprovedMachines(req, res) {
+  try {
+    const machines = await MachineService.getAllApprovedMachines();
     return res.status(200).json({
       success: true,
       machines,
@@ -99,6 +111,7 @@ module.exports = {
   addMachine,
   getOneMachine,
   getAllMachines,
+  getAllApprovedMachines,
   deleteMachine,
   validate,
 };
