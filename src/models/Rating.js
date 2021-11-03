@@ -18,6 +18,10 @@ const RatingSchema = new Schema({
   comment: {
     type: Schema.Types.String,
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const Rating = mongoose.model('ratings', RatingSchema);

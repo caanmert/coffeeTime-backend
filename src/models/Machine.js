@@ -2,52 +2,47 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-/* const LocationSchema = new Schema({
+const LocationSchema = new Schema({
 
   city: {
     type: Schema.Types.String,
   },
-  longitude: {
-    type: Schema.Types.String,
+  type: {
+    type: String,
+    enum: ['Point', 'Polygon'],
+    default: 'Point',
+    required: true,
   },
-  latitude: {
-    type: Schema.Types.String,
+  coordinates: {
+    type: Array,
+    required: true,
+    unique: true,
   },
-}); */
 
-const RatingSchema = new Schema({
-  comment: {
-    type: Schema.Types.String,
-  },
-  value: {
-    type: Schema.Types.Number,
-    max: 10,
-    min: 1,
-  },
 });
 
 const MachineSchema = new Schema({
 
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'Users',
-    required: true,
+    ref: 'users',
+    // required: true,
   },
-
   machine: {
     type: Schema.Types.String,
     required: true,
   },
-  city: {
-    type: Schema.Types.String,
+  location: {
+    type: LocationSchema,
+    required: true,
   },
-  coordinates: [],
   image: {
     type: [String],
   },
-
-  ratings: [RatingSchema],
-
+  ratings: {
+    type: Schema.Types.ObjectId,
+    ref: 'ratings',
+  },
   approved: {
     type: Boolean,
     default: false,
@@ -56,8 +51,9 @@ const MachineSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-
 });
+
+MachineSchema.index({ location: '2dsphere' });
 
 const Machine = mongoose.model('machines', MachineSchema);
 module.exports = Machine;

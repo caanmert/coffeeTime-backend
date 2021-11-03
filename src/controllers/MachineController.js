@@ -15,7 +15,11 @@ async function addMachine(req, res) {
     }
     const newMachine = {
       machine: req.body.machine,
-      coordinates: [req.body.coordinates],
+      location: {
+        city: req.body.city,
+        coordinates: req.body.coordinates,
+
+      },
 
     };
     const machine = await MachineService.addMachine(newMachine);
@@ -101,8 +105,14 @@ const validate = (method) => {
     case 'add': {
       return [
         body('machine').exists().notEmpty().withMessage('Machine Field is empty'),
-
+        body('coordinates').exists().notEmpty().withMessage('Coordinates field is empty')
+          .isArray()
+          .isLength(1)
+          .withMessage('Coordinates field must be array'),
       ];
+    }
+    default: {
+      return null;
     }
   }
 };
