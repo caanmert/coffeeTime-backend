@@ -10,7 +10,7 @@ const session = require('express-session');
 require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 6000;
 app.use(cors());
 app.post('*', cors());
 app.options('*', cors());

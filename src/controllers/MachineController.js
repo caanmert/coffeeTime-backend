@@ -56,8 +56,6 @@ async function getAllMachines(req, res) {
 
 async function getAllApprovedMachines(req, res) {
   const { lat, long } = req.params;
-  console.log('here');
-  console.log(lat, long);
   try {
     const machines = await MachineService.getAllApprovedMachines(lat, long).populate('user', 'username');
     return res.status(200).json({
