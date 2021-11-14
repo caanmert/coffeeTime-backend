@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(express.json());
 
-const uri = process.env.DB_URL;
+const uri = process.env.DB_URL_PRODUCTION;
 mongoose.connect(uri, {
   useNewUrlParser: true, useUnifiedTopology: true,
 });
