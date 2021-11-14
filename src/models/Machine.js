@@ -26,26 +26,29 @@ const MachineSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'users',
-    // required: true,
-  },
-  machine: {
-    type: Schema.Types.String,
     required: true,
+  },
+  name: {
+    type: Schema.Types.String,
+  },
+  description: {
+    type: Schema.Types.String,
   },
   location: {
     type: LocationSchema,
     required: true,
   },
-  image: {
-    type: [String],
-  },
   ratings: {
     type: Schema.Types.ObjectId,
     ref: 'ratings',
   },
+  images: {
+    type: Schema.Types.ObjectId,
+    ref: 'images',
+  },
   approved: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   createdAt: {
     type: Date,

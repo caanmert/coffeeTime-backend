@@ -2,27 +2,20 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const RatingSchema = new Schema({
+const ImageSchema = new Schema({
 
   user: {
     type: Schema.Types.ObjectId,
     ref: 'Users',
     required: true,
   },
-
   machine: {
     type: Schema.Types.ObjectId,
     ref: 'Users',
     required: true,
   },
-
-  value: {
-    type: Schema.Types.Number,
-    max: 10,
-    min: 1,
-  },
-  comment: {
-    type: Schema.Types.String,
+  image: {
+    type: [String],
   },
   createdAt: {
     type: Date,
@@ -30,5 +23,5 @@ const RatingSchema = new Schema({
   },
 });
 
-const Rating = mongoose.model('ratings', RatingSchema);
-module.exports = Rating;
+const Image = mongoose.model('images', ImageSchema);
+module.exports = Image;
