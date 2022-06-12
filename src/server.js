@@ -10,7 +10,7 @@ const session = require('express-session');
 require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 6000;
+const port = process.env.PORT;
 app.use(cors());
 app.post('*', cors());
 app.options('*', cors());
@@ -27,7 +27,8 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(express.json());
 
-const uri = process.env.DB_URL_PRODUCTION;
+// const uri = process.env.DB_URL_PRODUCTION;
+const uri = process.env.DBB_TEST_URL;
 mongoose.connect(uri, {
   useNewUrlParser: true, useUnifiedTopology: true,
 });
